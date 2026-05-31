@@ -1,0 +1,58 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:projekt_Jakub_Siwek_Z403_AV.ViewModels"
+        xmlns:models="using:projekt_Jakub_Siwek_Z403_AV.Models"
+        mc:Ignorable="d" d:DesignWidth="850" d:DesignHeight="520"
+        x:Class="projekt_Jakub_Siwek_Z403_AV.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Title="System Bazodanowy Studentów - Profil Z403"
+        Width="850" Height="520"
+        WindowStartupLocation="CenterScreen">
+
+	<Grid Margin="20">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="2*" />
+			<ColumnDefinition Width="3*" />
+		</Grid.ColumnDefinitions>
+
+		<Border CornerRadius="6" BorderBrush="#CCCCCC" BorderThickness="1" Padding="2">
+			<ListBox ItemsSource="{Binding Students}"
+					 SelectedItem="{Binding SelectedStudent}">
+				<ListBox.ItemTemplate>
+					<DataTemplate x:DataType="models:Student">
+						<StackPanel Margin="5">
+							<TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="14"/>
+							<TextBlock Text="{Binding Surname}" Foreground="#666666" FontSize="13"/>
+							<TextBlock Text="{Binding GroupName}" FontSize="11" FontStyle="Italic" Foreground="#888888"/>
+						</StackPanel>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+		</Border>
+
+		<StackPanel Grid.Column="1" Margin="25,0,0,0">
+			<TextBlock Text="Imię:" FontWeight="Bold" Margin="0,0,0,3"/>
+			<TextBox Text="{Binding NameInput, Mode=TwoWay}" Margin="0,0,0,10"/>
+
+			<TextBlock Text="Nazwisko:" FontWeight="Bold" Margin="0,0,0,3"/>
+			<TextBox Text="{Binding SurnameInput, Mode=TwoWay}" Margin="0,0,0,10"/>
+
+			<TextBlock Text="Grupa:" FontWeight="Bold" Margin="0,0,0,3"/>
+			<TextBox Text="{Binding GroupInput, Mode=TwoWay}" Margin="0,0,0,15"/>
+
+			<Button Content="Dodaj studenta"
+					Height="38" Margin="0,0,0,6"
+					HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+					Click="AddButton_Click"/>
+
+			<Button Content="Usuń zaznaczonego"
+					Height="38" Margin="0,0,0,15"
+					HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+					Click="DeleteButton_Click"/>
+
+			<ContentControl x:Name="MyCustomControlWrapper" />
+		</StackPanel>
+	</Grid>
+</Window>
